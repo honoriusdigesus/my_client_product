@@ -1,2 +1,21 @@
-<h1>Dashboard</h1>
-<router-outlet></router-outlet>
+<body class="font-poppins antialiased">
+<div
+  class="h-full w-screen flex flex-row"
+  id="view"
+  x-data="{ sidenav: true }"
+>
+
+<app-side-menu></app-side-menu>
+  <div
+    :class="{'ml-60': sidenav, 'ml-0': !sidenav}"
+    class="flex-grow p-5"
+  >
+    <h1 class="text-3xl font-bold">Dashboard</h1>
+    <div class="mt-5">
+      <!-- Aquí va el contenido de tu dashboard -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.4/dist/cdn.min.js"></script>
+</body>
