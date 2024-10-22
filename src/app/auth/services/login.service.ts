@@ -7,6 +7,8 @@ import {AuthStatus} from '../interfaces/auth-status.enum';
 import {LoginResponse} from '../interfaces/login-response';
 import {Router} from '@angular/router';
 import {CheckTokenResponse} from '../interfaces/check-token.response.interface';
+import {UserResponse} from '../interfaces/user-response.interface';
+import {UserRequest} from '../interfaces/user-request.interface';
 
 
 
@@ -79,4 +81,5 @@ export class LoginService {
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.unauthenticated);
   }
+
 }

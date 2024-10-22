@@ -54,7 +54,7 @@ export default class LoginComponent {
       title:title,
       text: errorMessage,
       icon: myIcon,
-      confirmButtonText: 'Cool'
+      timer: 3500,
     })
   }
 
