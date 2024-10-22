@@ -10,7 +10,7 @@
   <div class="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
     <div class="flex items-center justify-center w-full lg:p-12">
       <div class="flex items-center xl:p-10">
-        <form class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl border border-red-950 p-4 ">
+        <form (submit)="login()" [formGroup]="loginForm" class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl border border-red-950 p-4 ">
           <h3 class="mb-3 text-4xl font-extrabold text-red-950">Iniciar sesión</h3>
           <p class="mb-4 text-red-950">Ingresa tu correo y contraseña</p>
 
@@ -18,25 +18,21 @@
             <hr class="h-0 border-b border-solid border-red-950 grow">
           </div>
           <label class="mb-2 text-sm text-start text-red-950" for="email">Email*</label>
-          <input class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-red-400 mb-7 placeholder:text-red-950 bg-gray-200 text-red-950 rounded-2xl border border-red-950" id="email" placeholder="mail@loopple.com"
+          <input class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-red-400 mb-3 placeholder:text-red-950 bg-gray-200 text-red-950 rounded-2xl border border-red-950"
+                 id="email"
+                 formControlName="email"
+                 placeholder="mail@loopple.com"
                  type="email"/>
           <label class="mb-2 text-sm text-start text-red-950" for="password">Password*</label>
-          <input class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-red-400 placeholder:text-red-950 bg-gray-200 text-red-950 rounded-2xl border border-red-950" id="password" placeholder="Enter a password"
+          <input class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-red-400 placeholder:text-red-950 bg-gray-200 text-red-950 rounded-2xl border border-red-950"
+                 id="password"
+                 formControlName="password"
+                 placeholder="Enter a password"
                  type="password"/>
-          <div class="flex flex-row justify-between mb-8">
-            <label class="relative inline-flex items-center mr-3 cursor-pointer select-none">
-              <input checked class="sr-only peer" type="checkbox" value="">
-              <div
-                class="w-5 h-5 bg-white border-2 rounded-sm border-red-950 peer peer-checked:border-0 peer-checked:bg-red-950">
-                <img alt="tick"
-                     class=""
-                     src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/icons/check.png">
-              </div>
-            </label>
-            <a class="mr-4 text-sm font-medium text-red-950" href="javascript:void(0)">¿Olvidaste tu contraseña?</a>
-          </div>
+
           <button
-            class="w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-red-900 focus:ring-4 focus:ring-red-100 bg-red-950 border border-red-950">
+
+            class="w-full px-6 py-5 mt-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-red-900 focus:ring-4 focus:ring-red-100 bg-red-950 border border-red-950">
             Sign In
           </button>
           <p class="text-sm leading-relaxed text-red-950">¿Aún no estás registrado? <a class="font-bold text-red-950"

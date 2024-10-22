@@ -10,8 +10,12 @@
       <img alt="Avatar user" class="w-10 md:w-16 rounded-full mx-auto"
            src="https://image.lexica.art/full_webp/3c0c18ae-5b81-4fcf-b5c8-4f2826204821"/>
       <div>
-        <h2 class="font-medium text-xs md:text-sm text-center text-red-950">Eduard Pantazi</h2>
-        <p class="text-xs text-gray-500 text-center">Administrator</p>
+        <h2 class="font-medium text-xs md:text-sm text-center text-red-950">{{user()?.fullName}} {{user()?.lastName}}</h2>
+        @if (user()?.roleId == 1) {
+          <p class="text-xs text-gray-500 text-center">Administrador</p>
+        } @else {
+          <p class="text-xs text-gray-500 text-center">Field</p>
+        }
       </div>
     </div>
 
@@ -42,7 +46,7 @@
           <path
             d="M15 17l-5-5 5-5v4h7v2h-7v4zM4 6v12a2 2 0 002 2h4v2H6a4 4 0 01-4-4V6a4 4 0 014-4h4v2H6a2 2 0 00-2 2z"></path>
         </svg>
-        <span class="">Logout</span>
+        <span (click)="onLogout()" class="">Logout</span>
       </a>
       <hr>
     </div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {routes} from '../../../app.routes';
 import {RouterLink, RouterLinkActive} from '@angular/router';
+import {LoginService} from '../../../auth/services/login.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -14,5 +15,13 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 })
 export class SideMenuComponent {
 
+
+  private loginService = inject(LoginService);
+  public user = computed(() => this.loginService.currentUser());
   public menuItems = routes.map((route)=>route.children ?? []).flat()
+
+  onLogout(){
+    this.loginService.logout();
+  }
+
 }

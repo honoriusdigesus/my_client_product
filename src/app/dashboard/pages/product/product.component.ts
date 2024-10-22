@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
+import {LoginService} from '../../../auth/services/login.service';
 
 @Component({
   selector: 'app-product',
@@ -8,5 +9,4 @@ import { Component } from '@angular/core';
   styleUrl: './product.component.css'
 })
 export default class ProductComponent {
-
 }
