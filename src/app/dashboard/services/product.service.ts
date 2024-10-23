@@ -1,10 +1,8 @@
-import {inject, Injectable, OnInit} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, Observable, of, tap, throwError} from 'rxjs';
+import {catchError, Observable, tap, throwError} from 'rxjs';
 import {ProductResponse} from '../interfaces/product.interface';
-import {AuthStatus} from '../../auth/interfaces/auth-status.enum';
-import {LoginService} from '../../auth/services/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +11,8 @@ export class ProductService {
 
   private readonly baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
-  private loginservice = inject(LoginService);
 
   searchProduct(productName: string): Observable<ProductResponse> {
-
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
@@ -27,7 +23,11 @@ export class ProductService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
-    return this.http.get<ProductResponse[]>(`${this.baseUrl}/Api/Product/All`, {headers});
+    return this.http.get<ProductResponse[]>(`${this.baseUrl}/Api/Product/All`, {headers})
+      .pipe(
+        tap(() => console.log('Products fetched')),
+        catchError(err => throwError(() => err.error.message)
+        ));
   }
 
   //Delete product by name
@@ -35,7 +35,11 @@ export class ProductService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
-    return this.http.delete<ProductResponse>(`${this.baseUrl}/Api/Product/Delete/${productName}`, {headers});
+    return this.http.delete<ProductResponse>(`${this.baseUrl}/Api/Product/Delete/${productName}`, {headers})
+      .pipe(
+        tap(() => console.log('Product deleted:', productName)),
+        catchError(err => throwError(() => err.error.message)
+        ));
   }
 
   constructor() {

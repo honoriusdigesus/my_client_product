@@ -1,5 +1,5 @@
 <div
-  class="bg-white h-screen md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
+  class="bg-white h-screen md:block shadow-xl px-3 w-64 md:w-80 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
   id="sidebar">
   <div class="space-y-6 md:space-y-10 mt-10">
     <h1 class="hidden md:block font-bold text-sm md:text-xl text-center">
@@ -7,12 +7,12 @@
     </h1>
 
     <div class="space-y-3" id="profile">
-      <img alt="Avatar user" class="w-10 md:w-16 rounded-full mx-auto"
+      <img alt="Avatar user" class="w-24 md:w-32 rounded-full mx-auto"
            src="https://image.lexica.art/full_webp/3c0c18ae-5b81-4fcf-b5c8-4f2826204821"/>
       <div>
-        <h2 class="font-medium text-xs md:text-sm text-center text-red-950">{{user()?.fullName}} {{user()?.lastName}}</h2>
+        <h2 class="text-2xl font-extrabold md:text-2xl text-center text-red-950">{{user()?.fullName}} {{user()?.lastName}}</h2>
         @if (user()?.roleId == 1) {
-          <p class="text-xs text-gray-500 text-center">Administrador</p>
+          <p class="text-2xl text-gray-900 text-center">Administrador</p>
         } @else {
           <p class="text-xs text-gray-500 text-center">Field</p>
         }
@@ -26,7 +26,7 @@
         <a
           [routerLink]="item.path"
           routerLinkActive="bg-red-950 text-white"
-          class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-red-950 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
+          class="text-2xl font-medium text-gray-700 py-2 px-2 hover:bg-red-950 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
           href="#">
           <svg class="w-6 h-6 fill-current inline-block" fill="currentColor" viewBox="0 0 20 20"
                xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@
       }
       <hr>
       <a
-        class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-red-950 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
+        class="text-2xl font-medium text-gray-700 py-2 px-2 hover:bg-red-950 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
         href="#"
         routerLinkActive="bg-red-950 text-white">
         <svg class="w-6 h-6 fill-current inline-block" fill="currentColor" viewBox="0 0 24 24"

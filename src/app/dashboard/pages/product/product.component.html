@@ -17,21 +17,22 @@
           <p class="mt-1 text-red-950 text-xs">{{product.createdAt | date}}</p>
           <p class="mt-1 text-red-950">Precio: <span>{{product.price | currency}}</span></p>
         </div>
-        <!-- Botones Editar y Eliminar en una fila -->
+        <!-- Botones Editar y Eliminar con íconos -->
         <div class="flex space-x-3">
           <button
-            class="px-4 py-2 bg-green-400 text-red-950 font-semibold rounded-2xl border border-green-900 hover:bg-green-900 transition-colors">
-            Editar
+            class="px-2 py-2 bg-green-400 text-red-950 font-semibold rounded-2xl border border-green-900 hover:bg-green-900 transition-colors">
+            <i class="fas fa-edit"></i> <!-- Ícono de editar -->
           </button>
           <button
             (click)="deleteProductByName(product.productName)"
-            class="px-4 py-2 bg-red-400 text-red-950 font-semibold rounded-2xl border border-red-950 hover:bg-red-500 transition-colors">
-            Eliminar
+            class="px-2 py-2 bg-red-400 text-red-950 font-semibold rounded-2xl border border-red-950 hover:bg-red-500 transition-colors">
+            <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
           </button>
         </div>
       </div>
     </div>
   }
 </div>
+
 
 
