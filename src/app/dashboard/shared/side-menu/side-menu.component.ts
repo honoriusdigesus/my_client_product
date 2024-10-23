@@ -18,7 +18,10 @@ export class SideMenuComponent {
 
   private loginService = inject(LoginService);
   public user = computed(() => this.loginService.currentUser());
-  public menuItems = routes.map((route)=>route.children ?? []).flat()
+  public menuItems = routes.map((route)=>route.children ?? [])
+    .flat()
+    .filter((route)=>!route.path?.includes('**'))
+    .filter((route)=>!route.path?.includes(':DI'));
 
   onLogout(){
     this.loginService.logout();

@@ -28,9 +28,18 @@ export const routes: Routes = [
         loadComponent: () => import('./dashboard/pages/user/user.component')
       },
       {
+        path:'User/Get/:DI',
+        title: 'Users',
+        loadComponent: () => import('./dashboard/pages/users/users.component')
+      },
+      {
         path:'role',
         title: 'Roles',
         loadComponent: () => import('./dashboard/pages/role/role.component')
+      },
+      {
+        path:'**',
+        redirectTo: 'product',
       }
     ]
   },
