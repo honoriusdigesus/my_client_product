@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {UserResponse} from '../interfaces/user-response.interface';
 import {UserRequest} from '../interfaces/user-request.interface';
-import {Observable} from 'rxjs';
+import {catchError, Observable, tap, throwError} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -15,7 +15,11 @@ export class UserService {
   private http = inject(HttpClient);
 
   registerUser(user: UserRequest): Observable<UserResponse>{
-    return this.http.post<UserResponse>(`${this.baseUrl}/Api/User/Create`, user);
+    return this.http.post<UserResponse>(`${this.baseUrl}/Api/User/Create`, user)
+      .pipe(
+      tap((user) => console.log('User created:', user)),
+       catchError(err => throwError(() => err.error.message)
+    ));
   }
 
   constructor() { }
