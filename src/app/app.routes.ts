@@ -28,6 +28,11 @@ export const routes: Routes = [
         loadComponent: () => import('./dashboard/pages/product-update/product-update.component')
       },
       {
+        path: 'product/create',
+        title: 'Create product',
+        loadComponent: () => import('./dashboard/pages/create-product/create-product.component')
+      },
+      {
         path:'user',
         title: 'Users',
         loadComponent: () => import('./dashboard/pages/user/user.component')

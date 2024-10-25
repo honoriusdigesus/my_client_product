@@ -22,7 +22,11 @@ export class SideMenuComponent {
     .flat()
     .filter((route)=>!route.path?.includes('**'))
     .filter((route)=>!route.path?.includes(':DI'))
-    .filter((route)=>!route.path?.includes('update'));
+    .filter((route)=>!route.path?.includes('update'))
+    .filter((route)=>!route.path?.includes('product/create'))
+    .filter((route)=>!route.path?.includes('user'))
+    .filter((route)=>!route.path?.includes('role'))
+  ;
 
   onLogout(){
     this.loginService.logout();

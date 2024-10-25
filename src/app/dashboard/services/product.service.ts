@@ -60,6 +60,19 @@ export class ProductService {
       );
   }
 
+  //Create product
+  createProduct(product: ProductRequest): Observable<ProductResponse> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-Type', 'application/json');
+    return this.http.post<ProductResponse>(`${this.baseUrl}/Api/Product/Create`, product, { headers })
+      .pipe(
+        tap(() => console.log('Product created:', product)),
+        catchError(err => throwError(() => err.error.message)
+        ));
+  }
+
   constructor() {
   }
 

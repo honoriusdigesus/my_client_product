@@ -1,7 +1,7 @@
-<shared-search-box
-  (onValue)="getProductByName($event)"
-  placeholder="Ingrese en nombre del producto y presione enter">
-</shared-search-box>
+<!--<shared-search-box-->
+<!--  (onValue)="getProductByName($event)"-->
+<!--  placeholder="Ingrese en nombre del producto y presione enter">-->
+<!--</shared-search-box>-->
 
 <!--<p>{{productName.productName | json}}</p>-->
 
@@ -34,6 +34,12 @@
       </div>
     </div>
   }
+
+  <button
+    routerLink="/dashboard/product/create"
+    class="fixed bottom-6 right-6 bg-red-950 text-white p-4 rounded-full shadow-lg hover:bg-red-950 transition-colors">
+    <i class="fas fa-plus text-2xl"></i> <!-- Ícono de agregar -->
+  </button>
 </div>
 
 

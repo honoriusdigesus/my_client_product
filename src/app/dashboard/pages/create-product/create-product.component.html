@@ -1,0 +1,59 @@
+<div class="max-w-lg mx-auto bg-gray-200 p-6 rounded-xl shadow-md border border-red-950">
+  <h2 class="text-2xl font-bold text-red-950 mb-6 text-center">Formulario de Producto</h2>
+
+  <form [formGroup]="fromCreateProduct">
+
+    <!-- Campo Created By -->
+    <div class="mb-4">
+      <label class="block text-md font-medium text-red-950 mb-2" for="createdBy">Creado por (ID)</label>
+      <input
+        id="createdBy"
+        type="number"
+        formControlName="createdBy"
+        placeholder="ID del creador"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-red-950"
+      />
+    </div>
+
+    <!-- Campo Product Name -->
+    <div class="mb-4">
+      <label class="block text-md font-medium text-red-950 mb-2" for="productName">Nombre del Producto</label>
+      <input
+        id="productName"
+        type="text"
+        formControlName="productName"
+        placeholder="Ingresa el nombre del producto"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-red-950"
+      />
+    </div>
+
+    <!-- Campo Price -->
+    <div class="mb-4">
+      <label class="block text-md font-medium text-red-950 mb-2" for="price">Precio</label>
+      <input
+        id="price"
+        type="number"
+        formControlName="price"
+        placeholder="Ingresa el precio"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-red-950"
+      />
+    </div>
+
+
+
+    <!-- Botón Enviar -->
+    <div class="flex justify-end space-x-4">
+      <button
+        routerLink="/dashboard/products"
+        class="px-4 py-2 bg-gray-400 text-red-950 font-semibold rounded-2xl hover:bg-gray-600 transition-colors">
+        Cancelar
+      </button>
+      <button
+
+        (click)="createProduct()"
+        type="submit" class="px-4 py-2 bg-green-400 text-red-950 font-semibold rounded-2xl border border-green-900 hover:bg-green-900 transition-colors">
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
