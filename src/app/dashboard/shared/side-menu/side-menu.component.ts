@@ -21,7 +21,8 @@ export class SideMenuComponent {
   public menuItems = routes.map((route)=>route.children ?? [])
     .flat()
     .filter((route)=>!route.path?.includes('**'))
-    .filter((route)=>!route.path?.includes(':DI'));
+    .filter((route)=>!route.path?.includes(':DI'))
+    .filter((route)=>!route.path?.includes('update'));
 
   onLogout(){
     this.loginService.logout();

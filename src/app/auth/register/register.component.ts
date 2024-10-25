@@ -1,7 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {LoginService} from '../services/login.service';
 import {UserRequest} from '../interfaces/user-request.interface';
 import Swal, {SweetAlertIcon} from 'sweetalert2';
 import {UserService} from '../services/user.service';
@@ -21,6 +20,7 @@ export default class RegisterComponent {
   private formBuilder = inject(FormBuilder);
   private userService = inject(UserService);
   private router = inject(Router);
+
 
   formRegister: FormGroup;
 

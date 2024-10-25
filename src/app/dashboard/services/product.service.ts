@@ -42,6 +42,15 @@ export class ProductService {
         ));
   }
 
+  //Update product
+  updateProduct(oldNameProduct:string, productUpdate: ProductResponse): Observable<ProductResponse> {
+    //body newNameProduct, price
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+    return this.http.put<ProductResponse>(`${this.baseUrl}/Api/Product/Update/${oldNameProduct}`, {productUpdate}, {headers})
+  }
+
   constructor() {
   }
 

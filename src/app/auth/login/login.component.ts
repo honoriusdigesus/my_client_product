@@ -48,7 +48,6 @@ export default class LoginComponent {
       );
   }
 
-  // Ejemplo de notificación de error
   showMessage(title:string,errorMessage: string, myIcon:SweetAlertIcon) {
     Swal.fire({
       title:title,

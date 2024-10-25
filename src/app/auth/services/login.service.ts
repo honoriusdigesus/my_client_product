@@ -5,11 +5,7 @@ import {catchError, map, Observable, of, tap, throwError} from 'rxjs';
 import {User} from '../interfaces/user';
 import {AuthStatus} from '../interfaces/auth-status.enum';
 import {LoginResponse} from '../interfaces/login-response';
-import {Router} from '@angular/router';
 import {CheckTokenResponse} from '../interfaces/check-token.response.interface';
-import {UserResponse} from '../interfaces/user-response.interface';
-import {UserRequest} from '../interfaces/user-request.interface';
-
 
 
 @Injectable({
@@ -22,38 +18,26 @@ export class LoginService {
 
 
   private _currentUser = signal<User | null>(null);
-  private _authStatus = signal<AuthStatus>(AuthStatus.checking);
-
   public currentUser = computed(() => this._currentUser());
+
+  private _authStatus = signal<AuthStatus>(AuthStatus.checking);
   public authStatus = computed(() => this._authStatus());
 
   constructor() {
     this.checkLoginStatus().subscribe();
   }
 
-  private setLoginAuthenticated(user: User, token: string):Boolean{
-    localStorage.setItem('token', token);
-    this._currentUser.set(user);
-    this._authStatus.set(AuthStatus.authenticated);
-    return true;
-  }
-
   login(email: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/Api/Login/Auth`;
     const body = {email, password};
     return this.http.post<LoginResponse>(url, body)
-      .pipe(
-        tap(({user, token}) => {
-          this.setLoginAuthenticated(user, token);
-          console.log('Logged in as', user, 'with token', token);
-        }),
-        map(() => true),
-        catchError(err => throwError(() => err.error.message)
-        )
-      );
+      .pipe(tap(({user, token}) => {
+        this.setLoginAuthenticated(user, token);
+        console.log('[Line 36 Login]Logged in as', user, 'with token', token);
+      }), map(() => true), catchError(err => throwError(() => err.error.message)));
   }
 
-  checkLoginStatus():Observable<boolean>{
+  checkLoginStatus(): Observable<boolean> {
     const url = `${this.baseUrl}/Api/Login/ValidateToken`;
     const token = localStorage.getItem('token');
 
@@ -61,25 +45,30 @@ export class LoginService {
       this._authStatus.set(AuthStatus.unauthenticated);
       return of(false);
     }
-    const headers =new HttpHeaders()
+    const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
-    return this.http.post<CheckTokenResponse>(url,{}, {headers})
-      .pipe(
-        map((userResponse)=>{
-          this.setLoginAuthenticated(userResponse, token);
-          return true
-        }),
-        catchError(()=>{
-          this._authStatus.set(AuthStatus.unauthenticated);
-          return of(false);
-        })
-      )
+    return this.http.post<CheckTokenResponse>(url, {}, {headers})
+      .pipe(map((userResponse) => {
+        this.setLoginAuthenticated(userResponse, token);
+        return true
+      }), catchError(() => {
+        this._authStatus.set(AuthStatus.unauthenticated);
+        return of(false);
+      }))
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.unauthenticated);
+  }
+
+  private setLoginAuthenticated(user: User, token: string): Boolean {
+    localStorage.setItem('token', token);
+    this._currentUser.set(user);
+    this._authStatus.set(AuthStatus.authenticated);
+    console.log('[Line 70 Login]Logged in as', user, 'with token', token);
+    return true;
   }
 
 }

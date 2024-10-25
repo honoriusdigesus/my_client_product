@@ -23,6 +23,11 @@ export const routes: Routes = [
         loadComponent: () => import('./dashboard/pages/product/product.component')
       },
       {
+        path: 'product/update',
+        title: 'Update product',
+        loadComponent: () => import('./dashboard/pages/product-update/product-update.component')
+      },
+      {
         path:'user',
         title: 'Users',
         loadComponent: () => import('./dashboard/pages/user/user.component')

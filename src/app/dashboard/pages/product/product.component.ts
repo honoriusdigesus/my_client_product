@@ -1,34 +1,43 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {ProductResponse} from '../../interfaces/product.interface';
 import {SearchBoxComponent} from '../../shared/search-box/search-box.component';
 import {ProductService} from '../../services/product.service';
-import {CurrencyPipe, DatePipe, JsonPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, JsonPipe} from '@angular/common';
 import Swal from 'sweetalert2';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [SearchBoxComponent, JsonPipe, CurrencyPipe, DatePipe],
+  imports: [SearchBoxComponent, JsonPipe, CurrencyPipe, DatePipe, RouterLink, DecimalPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export default class ProductComponent {
+export default class ProductComponent implements OnInit {
 
   productName: ProductResponse = {
     productId: 0, productName: '', price: 0, createdBy: 0, createdAt: new Date()
   };
-  public products: ProductResponse[] = [];
+
+
+  public products = signal<ProductResponse[]>([]);
   private productService = inject(ProductService);
+  private router = inject(Router);
+  public productCurrent = signal<ProductResponse | null>(null);
 
   constructor() {
-    this.getAllProducts();
   }
+
+  ngOnInit(): void {
+    this.getAllProducts();
+    }
 
   getProductByName(productName: string) {
     console.log('Getting product by name:', productName);
     return this.productService.searchProduct(productName)
       .subscribe(product => {
         this.productName = product;
+        this.productCurrent.set(product);
       });
   }
 
@@ -36,7 +45,7 @@ export default class ProductComponent {
     console.log('Getting all products');
     return this.productService.getAllProducts()
       .subscribe(products => {
-        this.products = products;
+        this.products.set(products);
       });
   }
 
@@ -78,11 +87,17 @@ export default class ProductComponent {
                 text: "Se produjo un error al eliminar el producto.",
                 icon: "error"
               });
+            },
+            () => {
+              this.getAllProducts();
             }
           );
       }
-      this.getAllProducts();
     });
   }
 
+  sendDataToUpdate(nameProduct: string, priceProduct: number, productID: number) {
+    console.log('Sending data to update');
+    this.router.navigate(['/dashboard/product/update', { name: nameProduct, price: priceProduct, productID }]);
+  }
 }

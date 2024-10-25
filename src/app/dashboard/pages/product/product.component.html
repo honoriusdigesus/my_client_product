@@ -6,20 +6,22 @@
 <!--<p>{{productName.productName | json}}</p>-->
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  @for (product of products; track $index) {
+  @for (product of products(); track $index) {
     <div class="bg-gray-200 rounded-xl shadow-md overflow-hidden border border-red-950">
       <div class="p-4 flex items-center justify-between">
         <div class="pr-4">
-          <p class="text-2xl font-semibold text-red-950">{{product.productName}}</p>
+          <p class="text-4xl font-semibold text-red-950">{{product.productName}}</p>
         </div>
         <div class="flex flex-col items-start">
-          <div class="uppercase tracking-wide text-xs text-red-950 font-semibold">Fecha de creación</div>
-          <p class="mt-1 text-red-950 text-xs">{{product.createdAt | date}}</p>
+          <div class="uppercase tracking-wide text-md text-red-950 font-semibold">Fecha de creación</div>
+          <p class="mt-1 text-red-950 text-md">ID: {{product.productId | number}}</p>
+          <p class="mt-1 text-red-950 text-md">{{product.createdAt | date}}</p>
           <p class="mt-1 text-red-950">Precio: <span>{{product.price | currency}}</span></p>
         </div>
         <!-- Botones Editar y Eliminar con íconos -->
         <div class="flex space-x-3">
           <button
+            (click)="sendDataToUpdate(product.productName, product.price, product.productId)"
             class="px-2 py-2 bg-green-400 text-red-950 font-semibold rounded-2xl border border-green-900 hover:bg-green-900 transition-colors">
             <i class="fas fa-edit"></i> <!-- Ícono de editar -->
           </button>
